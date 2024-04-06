@@ -1,0 +1,37 @@
+﻿﻿@model CumulativeProject1.Models.Teacher
+@{
+    ViewBag.Title = "Show";
+}
+
+<script>
+    window.onload = function () {
+        document.getElementById("delete").addEventListener("click", function () {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/Teacher/Delete/@Model.teacherId');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    location.href = '/Teacher/List';
+                    console.log('successful')
+                }
+            }
+        })
+    }
+</script>
+
+<div id="containershow">
+    <nav>
+        <a class="navlink" href="/Teacher/List">Back To Teacher</a>
+        <div id="containershow">
+
+            <a class="navlink" href="/Teacher/List">Back To Teacher</a>
+
+            <a class="navlink" href="/Teacher/Modify/@Model.teacherId">Update</a>
+            <button id="delete">Delete</button>
+        </div>
+    </nav>
+
+    <h2>@Model.teacherFname @Model.teacherLname</h2>
+        @Convert.ToDateTime(Model.hiredate).ToString("dd-MMM-yyyy")</p>
+     <p>@Model.employeenumber @Model.salary</p>
+</div>
